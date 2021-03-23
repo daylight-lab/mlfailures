@@ -43,10 +43,8 @@ def generate_synthetic_data(plot_data=False):
     
     if plot_data:
         plot_synthetic_data(X_non_sensitive, y, sensitive_feat_array)
-        
-    sensitive_feat_dict = {"s1": sensitive_feat} # store all sensitive features in a dictionary
-    
-    return X_non_sensitive, y, sensitive_feat_dict
+          
+    return X_non_sensitive, y, sensitive_feat
 
 def generate_non_sensitive_feat():
 
