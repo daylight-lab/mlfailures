@@ -389,7 +389,7 @@ def split_into_train_test(x_all, y_all, x_control_all, train_fold_size):
     y_all_train = y_all[:split_point]
     y_all_test = y_all[split_point:]
     x_control_all_train = x_control_all[:split_point]
-    x_control_all_test = x_controll_all[split_point:]
+    x_control_all_test = x_control_all[split_point:]
 #     x_control_all_train = {}
 #     x_control_all_test = {}
 #     for k in x_control_all.keys():
