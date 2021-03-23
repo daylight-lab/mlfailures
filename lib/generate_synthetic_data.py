@@ -44,7 +44,7 @@ def generate_synthetic_data(plot_data=False):
     if plot_data:
         plot_synthetic_data(X_non_sensitive, y, sensitive_feat_array)
           
-    return X_non_sensitive, y, sensitive_feat
+    return X_non_sensitive, y, sensitive_feat_array
 
 def generate_non_sensitive_feat():
 
