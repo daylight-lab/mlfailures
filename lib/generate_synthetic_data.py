@@ -43,8 +43,12 @@ def generate_synthetic_data(plot_data=False):
     
     if plot_data:
         plot_synthetic_data(X_non_sensitive, y, sensitive_feat_array)
+    
+    # NOTE - This complicates the code somewhat, but lets our classify.py work with multiple sensitive features,
+    # which in turn makes the classify code more reusable for students. It's a tradeoff.
+    sensitive_feat_dict = {"s1": sensitive_feat}
           
-    return X_non_sensitive, y, sensitive_feat_array
+    return X_non_sensitive, y, sensitive_feat_dict
 
 def generate_non_sensitive_feat():
 
