@@ -198,7 +198,7 @@ def print_classifier_fairness_stats(acc_arr, correlation_dict_arr, cov_dict_arr,
     p_rule = (prot_pos / non_prot_pos) * 100.0
     
     print("Accuracy: %0.2f" % (np.mean(acc_arr)))
-    print("Protected/non-protected in +ve class: %0.0f%% / %0.0f%%" % (prot_pos, non_prot_pos))
+    print("Privileged/non-privileged in +ve class: %0.0f%% / %0.0f%%" % (non_prot_pos, prot_pos))
     print("P-rule achieved: %0.0f%%" % (p_rule))
     print("Covariance between sensitive feature and decision from distance boundary : %0.3f" % (np.mean([v[s_attr_name] for v in cov_dict_arr])))
     print()
@@ -218,10 +218,10 @@ def compute_p_rule(x_control, class_labels):
     p_rule = (frac_prot_pos / frac_non_prot_pos) * 100.0
     print()
     print("Total data points: %d" % (len(x_control)))
-    print("# non-protected examples: %d" % (non_prot_all))
-    print("# protected examples: %d" % (prot_all))
-    print("Non-protected in positive class: %d (%0.0f%%)" % (non_prot_pos, non_prot_pos * 100.0 / non_prot_all))
-    print("Protected in positive class: %d (%0.0f%%)" % (prot_pos, prot_pos * 100.0 / prot_all))
+    print("# privileged examples: %d" % (non_prot_all))
+    print("# unprivileged examples: %d" % (prot_all))
+    print("Privileged in positive class: %d (%0.0f%%)" % (non_prot_pos, non_prot_pos * 100.0 / non_prot_all))
+    print("Unprivileged in positive class: %d (%0.0f%%)" % (prot_pos, prot_pos * 100.0 / prot_all))
     print("P-rule is: %0.0f%%" % ( p_rule ))
     return p_rule
 
@@ -474,10 +474,10 @@ def plot_boundaries(X, y, x_sensitive_array, theta1, p_rule1, accuracy1, theta2=
     X_unprotected = X_draw[x_sensitive_draw == 1.0]
     y_protected = y_draw[x_sensitive_draw == 0.0]
     y_unprotected = y_draw[x_sensitive_draw == 1.0]
-    plt.scatter(X_protected[y_protected==1.0][:, 1], X_protected[y_protected==1.0][:, 2], color='green', marker='x', s=30, linewidth=1.5, label= "Protected (female), Hired")
-    plt.scatter(X_protected[y_protected==-1.0][:, 1], X_protected[y_protected==-1.0][:, 2], color='red', marker='x', s=30, linewidth=1.5, label = "Protected (female), Not Hired")
-    plt.scatter(X_unprotected[y_unprotected==1.0][:, 1], X_unprotected[y_unprotected==1.0][:, 2], color='green', marker='o', facecolors='none', s=30, label = "Unprotected (male), Hired")
-    plt.scatter(X_unprotected[y_unprotected==-1.0][:, 1], X_unprotected[y_unprotected==-1.0][:, 2], color='red', marker='o', facecolors='none', s=30, label = "Unprotected (male), Not Hired")
+    plt.scatter(X_protected[y_protected==1.0][:, 1], X_protected[y_protected==1.0][:, 2], color='green', marker='x', s=30, linewidth=1.5, label= "Unprivileged (female), Hired")
+    plt.scatter(X_protected[y_protected==-1.0][:, 1], X_protected[y_protected==-1.0][:, 2], color='red', marker='x', s=30, linewidth=1.5, label = "Unprivileged (female), Not Hired")
+    plt.scatter(X_unprotected[y_unprotected==1.0][:, 1], X_unprotected[y_unprotected==1.0][:, 2], color='green', marker='o', facecolors='none', s=30, label = "Privileged (male), Hired")
+    plt.scatter(X_unprotected[y_unprotected==-1.0][:, 1], X_unprotected[y_unprotected==-1.0][:, 2], color='red', marker='o', facecolors='none', s=30, label = "Privileged (male), Not Hired")
 
     # draw the decision boundary
     def get_line_coordinates(w, x1, x2):
