@@ -198,7 +198,7 @@ def print_classifier_fairness_stats(acc_arr, correlation_dict_arr, cov_dict_arr,
     p_rule = (prot_pos / non_prot_pos) * 100.0
     
     print("Accuracy: %0.2f" % (np.mean(acc_arr)))
-    print("Privileged/non-privileged in +ve class: %0.0f%% / %0.0f%%" % (non_prot_pos, prot_pos))
+    print("Privileged/non-privileged in positive class: %0.0f%% / %0.0f%%" % (non_prot_pos, prot_pos))
     print("P-rule achieved: %0.0f%%" % (p_rule))
     print("Covariance between sensitive feature and decision from distance boundary : %0.3f" % (np.mean([v[s_attr_name] for v in cov_dict_arr])))
     print()
